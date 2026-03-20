@@ -1,6 +1,14 @@
 import { CHATBOT_API_BASE, CHATBOT_TENANT_ID } from '../config';
 import { formatCurrency } from './calculations';
 
+/** Normalize phone to digits-only with country code: 5511912345678 */
+function normalizePhone(raw) {
+  let digits = raw.replace(/\D/g, '');
+  if (digits.startsWith('0')) digits = '55' + digits.slice(1);
+  if (!digits.startsWith('55')) digits = '55' + digits;
+  return digits;
+}
+
 export async function sendResultsToChatbot(leadData, results) {
   try {
     const res = await fetch(`${CHATBOT_API_BASE}/webhook/audit-lead`, {
@@ -8,7 +16,7 @@ export async function sendResultsToChatbot(leadData, results) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         tenantId: CHATBOT_TENANT_ID,
-        phone: leadData.whatsapp,
+        phone: normalizePhone(leadData.whatsapp),
         name: leadData.nome,
         auditData: {
           source: 'calculadora_agenda',
