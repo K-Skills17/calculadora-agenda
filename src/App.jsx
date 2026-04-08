@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import AgendaForm from './components/AgendaForm';
 import LeadCapture from './components/LeadCapture';
@@ -8,11 +8,35 @@ import { sendToSheet } from './utils/sheets';
 import { sendResultsToChatbot } from './utils/chatbot';
 import './App.css';
 
+/** Decode a base64-JSON hash into { inputs, results } or null */
+function decodeHash() {
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return null;
+    const json = atob(hash);
+    const data = JSON.parse(json);
+    if (data && data.results) return data;
+  } catch {
+    /* invalid hash — ignore */
+  }
+  return null;
+}
+
 function App() {
   const [step, setStep] = useState('landing');
   const [inputs, setInputs] = useState(null);
   const [results, setResults] = useState(null);
   const [leadData, setLeadData] = useState(null);
+
+  // On mount: check for shared results in URL hash
+  useEffect(() => {
+    const shared = decodeHash();
+    if (shared) {
+      setResults(shared.results);
+      setInputs(shared.inputs || null);
+      setStep('results');
+    }
+  }, []);
 
   const handleStart = () => {
     setStep('form');
@@ -44,7 +68,7 @@ function App() {
       horaRealAtual: results.horaRealAtual,
     });
 
-    // Send results to AI chatbot → chatbot sends WhatsApp report to user
+    // Send results to AI chatbot -> chatbot sends WhatsApp report to user
     sendResultsToChatbot(data, results);
   };
 
@@ -53,7 +77,7 @@ function App() {
       {step === 'landing' && <LandingPage onStart={handleStart} />}
       {step === 'form' && <AgendaForm onCalculate={handleCalculate} />}
       {step === 'leadCapture' && <LeadCapture results={results} onSubmit={handleLeadSubmit} />}
-      {step === 'results' && <ResultsDashboard results={results} leadData={leadData} />}
+      {step === 'results' && <ResultsDashboard results={results} inputs={inputs} leadData={leadData} />}
     </>
   );
 }

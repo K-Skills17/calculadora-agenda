@@ -143,6 +143,10 @@ h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight:
 .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 16px; }
 .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); }
 
+.btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; margin-top: 12px; }
+.btn-share:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); color: var(--accent); }
+.btn-share svg { flex-shrink: 0; }
+
 .footer { text-align: center; padding: 32px; color: var(--text-light); font-size: 13px; }
 .footer a { color: var(--accent); text-decoration: none; }
 
