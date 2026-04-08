@@ -57,6 +57,15 @@ export default function LeadCapture({ results, onSubmit }) {
         Seus dados estão seguros e não serão compartilhados.
       </div>
 
+      {/* Contact Info */}
+      <div className="contact-section fade-up fade-up-delay-3">
+        <p>Precisa de ajuda? Fale conosco:</p>
+        <div className="contact-links">
+          <a href="mailto:contato@lkdigital.org">📧 contato@lkdigital.org</a>
+          <a href="tel:+5511946851028">📞 (11) 94685-1028</a>
+        </div>
+      </div>
+
       <div className="footer">
         <a href="https://lkdigital.odo.br" target="_blank" rel="noopener noreferrer">lkdigital.odo.br</a>
       </div>

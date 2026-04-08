@@ -253,6 +253,15 @@ export default function ResultsDashboard({ results, inputs, leadData }) {
           </button>
         </div>
 
+        {/* Contact Info */}
+        <div className="contact-section fade-up">
+          <p>Precisa de ajuda? Fale conosco:</p>
+          <div className="contact-links">
+            <a href="mailto:contato@lkdigital.org">📧 contato@lkdigital.org</a>
+            <a href="tel:+5511946851028">📞 (11) 94685-1028</a>
+          </div>
+        </div>
+
         <div className="footer">
           Ferramenta gratuita por{' '}
           <a href="https://lkdigital.odo.br" target="_blank" rel="noopener noreferrer">LK Digital</a>
